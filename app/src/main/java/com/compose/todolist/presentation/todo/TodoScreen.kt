@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.ui.graphics.Color
 import com.compose.todolist.ui.theme.LocalCustomColors
 import com.compose.todolist.utils.DateUtils
 
@@ -410,7 +411,7 @@ fun TodoEditContent(
                     Icon(
                         Icons.Default.Delete,
                         contentDescription = "Delete",
-                        tint = MaterialTheme.colorScheme.error
+                        tint = Color(0xFFFF0000)
                     )
                 }
             }
