@@ -21,7 +21,7 @@
 
 Grab the APK from [Releases](https://github.com/GurvirS9/ComposeTodoAppC/releases/)
 
-Instructions to get new api key:
+# Instructions to get New API key:
 Get API key from https://todocrud.chiggydoes.tech/register/
 
 # Themes:
