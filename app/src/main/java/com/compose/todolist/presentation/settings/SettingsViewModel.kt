@@ -1,15 +1,17 @@
-package com.compose.todolist.presentation
+package com.compose.todolist.presentation.settings
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.compose.todolist.data.SettingsData
+import com.compose.todolist.data.models.SettingsData
 import com.compose.todolist.data.SettingsManager
-import kotlinx.coroutines.flow.StateFlow
+import com.compose.todolist.data.ThemeOption
+import com.compose.todolist.data.ThemeRepo
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
     private val settingsManager = SettingsManager(application)
@@ -25,13 +27,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun updateDarkMode(enabled: Boolean) {
-        viewModelScope.launch {
-            Log.d("SettingsViewModel", "Updating dark mode: $enabled")
-            settingsManager.updateDarkMode(enabled)
-        }
-    }
-
     fun updateApiKey(apiKey: String) {
         viewModelScope.launch {
             Log.d("SettingsViewModel", "Updating API key: $apiKey")
@@ -39,17 +34,13 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun updateColor(key: String, color: String) {
+    fun applyTheme(theme: ThemeOption) {
         viewModelScope.launch {
-            Log.d("SettingsViewModel", "Updating color: $key -> $color")
-            settingsManager.updateColor(key, color)
+            Log.d("SettingsViewModel", "Applying theme: ${theme.name}")
+            settingsManager.applyTheme(theme)
         }
     }
 
-    fun updateCustomColors(enabled: Boolean) {
-        viewModelScope.launch {
-            Log.d("SettingsViewModel", "Updating custom colors: $enabled")
-            settingsManager.updateCustomColors(enabled)
-        }
-    }
+    fun getLightThemes() = ThemeRepo.lightThemes
+    fun getDarkThemes() = ThemeRepo.darkThemes
 }

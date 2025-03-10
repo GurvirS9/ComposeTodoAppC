@@ -1,8 +1,8 @@
-package com.compose.todolist.presentation
+package com.compose.todolist.presentation.todo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.compose.todolist.data.TodoService
+import com.compose.todolist.data.network.TodoService
 
 class TodoViewModelFactory(private val todoService: TodoService) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

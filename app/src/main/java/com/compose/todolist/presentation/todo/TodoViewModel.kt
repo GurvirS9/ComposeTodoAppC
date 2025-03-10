@@ -1,12 +1,18 @@
-package com.compose.todolist.presentation
+package com.compose.todolist.presentation.todo
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.compose.todolist.data.*
+import com.compose.todolist.data.models.CreateTodoRequest
+import com.compose.todolist.data.models.Todo
+import com.compose.todolist.data.network.TodoService
+import com.compose.todolist.data.models.UpdateTodoRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 private const val TAG = "TodoViewModel"
 
@@ -26,7 +32,7 @@ class TodoViewModel(private val todoService: TodoService) : ViewModel() {
 
     private fun handleError(e: Exception, operation: String) {
         val errorMessage = when (e) {
-            is retrofit2.HttpException -> {
+            is HttpException -> {
                 when (e.code()) {
                     401 -> "Unauthorized"
                     403 -> "Forbidden"
@@ -34,8 +40,8 @@ class TodoViewModel(private val todoService: TodoService) : ViewModel() {
                     else -> "Server error (${e.code()})"
                 }
             }
-            is java.net.UnknownHostException -> "Network error - Check your connection"
-            is java.net.SocketTimeoutException -> "Connection timed out"
+            is UnknownHostException -> "Network error - Check your connection"
+            is SocketTimeoutException -> "Connection timed out"
             else -> "An unexpected error occurred"
         }
 

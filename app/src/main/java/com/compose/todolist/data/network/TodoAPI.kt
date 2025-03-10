@@ -1,6 +1,14 @@
-package com.compose.todolist.data
+package com.compose.todolist.data.network
 
-import retrofit2.http.*
+import com.compose.todolist.data.models.CreateTodoRequest
+import com.compose.todolist.data.models.Todo
+import com.compose.todolist.data.models.UpdateTodoRequest
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface TodoAPI {
     @GET("todos/")

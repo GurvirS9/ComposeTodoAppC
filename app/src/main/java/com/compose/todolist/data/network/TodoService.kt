@@ -1,6 +1,8 @@
-package com.compose.todolist.data
+package com.compose.todolist.data.network
 
 import android.content.Context
+import com.compose.todolist.data.SettingsManager
+import com.compose.todolist.data.network.TodoAPI
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient

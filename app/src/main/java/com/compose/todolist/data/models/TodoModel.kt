@@ -1,4 +1,4 @@
-package com.compose.todolist.data
+package com.compose.todolist.data.models
 
 data class Todo(
     val id: Int = 0,

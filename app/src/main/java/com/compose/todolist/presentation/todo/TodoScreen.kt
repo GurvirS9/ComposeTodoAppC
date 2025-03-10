@@ -1,4 +1,4 @@
-package com.compose.todolist.presentation
+package com.compose.todolist.presentation.todo
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -22,7 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.compose.todolist.data.Todo
+import com.compose.todolist.data.models.Todo
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Refresh
@@ -353,7 +354,9 @@ fun TodoItem(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+
                 Spacer(modifier = Modifier.height(4.dp))
+
                 Text(
                     text = todo.description,
                     style = MaterialTheme.typography.bodyMedium.copy(
@@ -440,14 +443,28 @@ fun TodoEditContent(
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedTextColor = customColors.headerText,
-                    unfocusedTextColor = customColors.headerText
+                    unfocusedTextColor = customColors.headerText,
+                    focusedBorderColor = customColors.fabBackground,
+                    unfocusedBorderColor = customColors.headerText,
+                    cursorColor = customColors.fabBackground,
+                    focusedLabelColor = customColors.fabBackground,
+                    unfocusedLabelColor = customColors.cardText,
+                    selectionColors = TextSelectionColors(
+                        handleColor = customColors.fabBackground,
+                        backgroundColor = customColors.fabBackground
+                    )
                 )
             )
             if (showStatus) {
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(4.dp))
                 Checkbox(
                     checked = isCompleted,
-                    onCheckedChange = { isCompleted = it }
+                    onCheckedChange = { isCompleted = it },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = customColors.fabBackground,
+                        uncheckedColor = customColors.cardText,
+                        checkmarkColor = customColors.fabIcon
+                    )
                 )
             }
         }
@@ -464,7 +481,16 @@ fun TodoEditContent(
             maxLines = 5,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = customColors.headerText,
-                unfocusedTextColor = customColors.headerText
+                unfocusedTextColor = customColors.headerText,
+                focusedBorderColor = customColors.fabBackground,
+                unfocusedBorderColor = customColors.headerText,
+                cursorColor = customColors.fabBackground,
+                focusedLabelColor = customColors.fabBackground,
+                unfocusedLabelColor = customColors.cardText,
+                selectionColors = TextSelectionColors(
+                    handleColor = customColors.fabBackground,
+                    backgroundColor = customColors.fabBackground
+                )
             )
         )
 
@@ -481,7 +507,11 @@ fun TodoEditContent(
             Spacer(modifier = Modifier.width(8.dp))
             Button(
                 onClick = { onSave(todoTitle, description, isCompleted) },
-                enabled = todoTitle.isNotBlank()
+                enabled = todoTitle.isNotBlank(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = customColors.fabBackground,
+                    contentColor = customColors.fabIcon
+                )
             ) {
                 Text("Done")
             }

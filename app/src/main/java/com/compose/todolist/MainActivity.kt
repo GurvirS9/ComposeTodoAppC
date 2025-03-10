@@ -9,12 +9,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.compose.todolist.data.TodoService
-import com.compose.todolist.presentation.SettingsScreen
-import com.compose.todolist.presentation.SettingsViewModel
-import com.compose.todolist.presentation.TodoScreen
-import com.compose.todolist.presentation.TodoViewModel
-import com.compose.todolist.presentation.TodoViewModelFactory
+import com.compose.todolist.data.network.TodoService
+import com.compose.todolist.presentation.settings.SettingsScreen
+import com.compose.todolist.presentation.settings.SettingsViewModel
+import com.compose.todolist.presentation.todo.TodoScreen
+import com.compose.todolist.presentation.todo.TodoViewModel
+import com.compose.todolist.presentation.todo.TodoViewModelFactory
 import com.compose.todolist.ui.theme.TodoTheme
 
 class MainActivity : ComponentActivity() {

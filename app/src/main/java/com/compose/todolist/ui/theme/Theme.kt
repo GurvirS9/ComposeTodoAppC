@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.compose.todolist.data.SettingsData
+import com.compose.todolist.data.models.SettingsData
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFF53A4FF),
@@ -47,30 +47,12 @@ fun TodoTheme(
     settings: SettingsData,
     content: @Composable () -> Unit
 ) {
-    val darkTheme = settings.isDarkMode || isSystemInDarkTheme()
+    val darkTheme = isSystemInDarkTheme() || settings.isDarkMode
     val colorScheme = if (darkTheme) DarkColors else LightColors
 
-    // Only use custom colors if they're enabled AND we're not in dark mode
-    val customColors = if (settings.useCustomColors && !darkTheme) {
-        createCustomColors(settings)
-    } else {
-        CustomColors(
-            appBackground = if (darkTheme) Color(0xFF121212) else Color.White,
-            headerText = if (darkTheme) Color.White else Color.Black,
-            iconTint = if (darkTheme) Color.White else Color.Black,
-            cardBackground = if (darkTheme) Color(0xFF2D2D2D) else Color(0xFFF3F3F3),
-            cardText = if (darkTheme) Color.White else Color.Black,
-            checkboxBackground = if (darkTheme) Color(0xFF0047B1) else Color.Black,
-            checkboxIcon = if (darkTheme) Color.White else Color.Black,
-            fabBackground = if (darkTheme) Color(0xFF0D42FC) else Color(0xFF53A4FF),
-            fabIcon = if (darkTheme) Color.Black else Color.White,
-            counterBackground = if (darkTheme) Color(0xFF2D2D2D) else Color.White,
-            counterText = if (darkTheme) Color.White else Color(0xFF666666)
-        )
-    }
+    val customColors = createCustomColors(settings)
 
     Log.d("TodoTheme", "Dark theme: $darkTheme")
-    Log.d("TodoTheme", "Custom colors enabled: ${settings.useCustomColors}")
     Log.d("TodoTheme", "Custom colors applied: $customColors")
     Log.d("TodoTheme", "Settings received: $settings")
 
